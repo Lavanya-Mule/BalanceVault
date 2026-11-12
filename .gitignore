@@ -1,0 +1,16 @@
+# Local SQLite database and WAL files
+*.db
+*.db-wal
+*.db-shm
+*.sqlite*
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Environment / secrets
+.env
+.env.*
+

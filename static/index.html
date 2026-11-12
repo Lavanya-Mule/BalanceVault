@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BalanceVault — Financial Account &amp; Ledger Platform</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">BV</div>
+        <div>
+          <h1>BalanceVault</h1>
+          <div class="brand-sub">Double-Entry Ledger &amp; Zero-Trust Account Controls</div>
+        </div>
+      </div>
+      <div class="user-bar" id="user-bar"></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="status-banner" class="status-banner" role="status" aria-live="polite"></div>
+    <div id="app"></div>
+  </main>
+
+  <dialog id="open-account-dialog" closedby="any" aria-labelledby="open-account-title">
+    <div class="dialog-head">
+      <h2 id="open-account-title">Apply for New Account</h2>
+      <button type="button" class="secondary sm" data-close-dialog="open-account-dialog" aria-label="Close dialog">Close</button>
+    </div>
+    <form id="open-account-form">
+      <div class="form-group">
+        <label for="acct-name">Account Label</label>
+        <input id="acct-name" name="account_name" type="text" maxlength="60" required autofocus value="Primary Checking">
+        <span class="hint">Give your account a recognizable nickname (up to 60 characters).</span>
+      </div>
+      <div class="form-group">
+        <label for="acct-type">Account Type</label>
+        <select id="acct-type" name="account_type" required>
+          <option value="checking">Checking Account</option>
+          <option value="savings">Savings Reserve</option>
+          <option value="business">Business Operating</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="acct-notes">Onboarding / Purpose Notes (optional)</label>
+        <textarea id="acct-notes" name="onboarding_notes" maxlength="300" placeholder="Intended use or verification reference"></textarea>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="secondary" data-close-dialog="open-account-dialog">Cancel</button>
+        <button type="submit">Submit Application</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="ledger-dialog" class="wide" closedby="any" aria-labelledby="ledger-dialog-title">
+    <div class="dialog-head">
+      <h2 id="ledger-dialog-title">Account Double-Entry Ledger</h2>
+      <button type="button" class="secondary sm" data-close-dialog="ledger-dialog" aria-label="Close dialog">Close</button>
+    </div>
+    <p id="ledger-dialog-subtitle" class="muted"></p>
+    <div id="ledger-dialog-body"></div>
+  </dialog>
+
+  <dialog id="account-action-dialog" closedby="any" aria-labelledby="account-action-title">
+    <div class="dialog-head">
+      <h2 id="account-action-title">Update Account Status</h2>
+      <button type="button" class="secondary sm" data-close-dialog="account-action-dialog" aria-label="Close dialog">Close</button>
+    </div>
+    <form id="account-action-form">
+      <p id="account-action-summary" class="muted"></p>
+      <div class="form-group">
+        <label for="action-review-note">Review / Audit Note</label>
+        <textarea id="action-review-note" name="review_note" maxlength="300" autofocus placeholder="Reason for approval, rejection, freeze, or closure"></textarea>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="secondary" data-close-dialog="account-action-dialog">Cancel</button>
+        <button type="submit" id="account-action-submit">Confirm</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="admin-funds-dialog" closedby="any" aria-labelledby="admin-funds-title">
+    <div class="dialog-head">
+      <h2 id="admin-funds-title">System Reserve Operation</h2>
+      <button type="button" class="secondary sm" data-close-dialog="admin-funds-dialog" aria-label="Close dialog">Close</button>
+    </div>
+    <form id="admin-funds-form">
+      <p id="admin-funds-summary" class="muted"></p>
+      <div class="form-group">
+        <label for="funds-amount">Amount (USD)</label>
+        <input id="funds-amount" name="amount" type="number" step="0.01" min="0.01" required autofocus placeholder="100.00">
+      </div>
+      <div class="form-group">
+        <label for="funds-memo">Ledger Memo</label>
+        <input id="funds-memo" name="memo" type="text" maxlength="140" placeholder="Reason or settlement reference">
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="secondary" data-close-dialog="admin-funds-dialog">Cancel</button>
+        <button type="submit" id="admin-funds-submit">Execute</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="password-dialog" closedby="any" aria-labelledby="password-dialog-title">
+    <div class="dialog-head">
+      <h2 id="password-dialog-title">Change Password</h2>
+      <button type="button" class="secondary sm" data-close-dialog="password-dialog" aria-label="Close dialog">Close</button>
+    </div>
+    <form id="password-form">
+      <div class="form-group">
+        <label for="cur-pw">Current Password</label>
+        <input id="cur-pw" name="current_password" type="password" autocomplete="current-password" required autofocus>
+      </div>
+      <div class="form-group">
+        <label for="new-pw">New Password</label>
+        <input id="new-pw" name="new_password" type="password" autocomplete="new-password" minlength="8" required>
+        <span class="hint">At least 8 characters, including letters and digits.</span>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="secondary" data-close-dialog="password-dialog">Cancel</button>
+        <button type="submit">Update Password</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
